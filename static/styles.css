@@ -1,3 +1,34 @@
 .content-box {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
 
+.content-box h2 {
+    padding: 0;
+}
+
+.content-box .inline-box {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.content-box .inline-box #regForm input {
+    padding: 5px;
+    margin: 5px 0;
+    width: 100%;
+}
+
+.errortext {
+    color: rgb(255, 11, 11);
+    font-weight: bold;
+    padding-left: 1rem;
+    font-size: 17px;
+}
+
+.profileInfo {
+    border-top: solid black 1px;
 }

@@ -20,8 +20,9 @@ CREATE TABLE recipes (
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    name TEXT,
+    username TEXT,
     password TEXT,
+    role INTEGER
 )
 
 CREATE TABLE cafes (

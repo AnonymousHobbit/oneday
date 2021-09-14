@@ -3,20 +3,15 @@
 {% block content %}
 <div class="content-box">
     <div class="inline-box">
-        <h2>Register to your account</h2>
+        <h2>Login to your account</h2>
         {% if error %}
             <p class="errortext">{{ error }}</p>
         {% endif %}
-        <form action="/register" method="POST" id="regForm">
+        <form action="/login" method="POST" id="regForm">
             <input placeholder="Username" name="username" required><br>
             <input placeholder="Password" name="password" required><br>
-            
-            <select name="role">
-                <option value="1">Default user</option>
-                <option value="2">Admin</option>
-            </select>
-            <p></p>
-            <button type="submit">Register</button>
+
+            <button type="submit">Login</button>
         </form>
     </div>
 </div>

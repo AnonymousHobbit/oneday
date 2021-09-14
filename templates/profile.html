@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-box">
+    <div class="inline-box">
+        <h2>{{ user_data[0] }}</h2>
+        <div class="profileInfo">
+            {% if user_data[1] == 2 %}
+                <p>You are an administrator</p>
+            {% endif %}
+            <p>Current recipes</p>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
