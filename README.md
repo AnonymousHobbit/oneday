@@ -13,20 +13,20 @@ Käytännössä kahvia rakastavien pienimuotoinen foorumi ja arvostelupalsta.
 * Kahvilasivulla näkyy mitä kahveja on saatavilla
 
 ## ToDo
-[x] Login & register
-[x] Profile page & roles
-[ ] List cafes in rating order
-[ ] Search recipes
-[ ] Dockerized
-[ ] Github actions to heroku
+- [x] Login & register
+- [x] Profile page & roles
+- [ ] List cafes in rating order
+- [ ] Search recipes
+- [ ] Dockerized
+- [ ] Github actions to heroku
 
 ### Default user
-[ ] Add cafes to the database
-[ ] Rate cafes
-[ ] Add recipes as an default user
+- [ ] Add cafes to the database
+- [ ] Rate cafes
+- [ ] Add recipes as an default user
 
 ### Admin
-[x] Add coffee in profile page and list current coffees in profile page
-[ ] Remove cafes
-[ ] Remove recipes
-[x] Remove coffees
+- [x] Add coffee in profile page and list current coffees in profile page
+- [ ] Remove cafes
+- [ ] Remove recipes
+- [x] Remove coffees
