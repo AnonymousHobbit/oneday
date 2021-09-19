@@ -23,7 +23,7 @@
 }
 
 .errortext {
-    color: rgb(255, 11, 11);
+    color: rgb(95, 95, 95);
     font-weight: bold;
     padding-left: 1rem;
     font-size: 17px;
@@ -31,4 +31,8 @@
 
 .profileInfo {
     border-top: solid black 1px;
+}
+
+.coffeeList {
+    margin-top: 1rem;
 }

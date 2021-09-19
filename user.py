@@ -12,10 +12,11 @@ def login(username, password):
         return False
     if not check_password_hash(user[0], password):
         return False
-    session["user_id"] = user[1]
+
+    session["id"] = user[1]
     session["username"] = username
-    session["user_role"] = user[2]
-    session["csrf_token"] = os.urandom(16).hex()
+    session["role"] = user[2]
+    session["csrf"] = os.urandom(16).hex()
     return True
 
 def register(username, password, role):
@@ -41,5 +42,19 @@ def profile(id):
     sql = "SELECT username, role FROM users WHERE id=:user_id"
     result = db.session.execute(sql, {"user_id": id})
     user = result.fetchone()
-    print(user)
     return user
+
+def id():
+    return session.get("id", 0)
+
+def check_role(role):
+    if role == session.get("role", 0):
+        return True
+    else:
+        return False
+
+def csrf():
+    if session.get("csrf", 0) == request.form["csrf"]:
+        return True
+    else:
+        return False

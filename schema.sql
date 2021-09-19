@@ -1,7 +1,7 @@
 CREATE TABLE coffees (
     id SERIAL PRIMARY KEY,
     name TEXT,
-    creator_id TEXT,
+    creator_id INTEGER REFERENCES users
 )
 
 CREATE TABLE rating (

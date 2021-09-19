@@ -1,12 +1,9 @@
-
 from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from os import getenv
 
 #Custom modules
-import user
-
 app = Flask(__name__)
 app.secret_key = getenv("SECRET_KEY")
 
@@ -20,23 +17,54 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
+import user
+import coffee
+
 #Default route
 @app.route("/")
 def index():
     return render_template("index.html")
 
+
+## Coffees
+@app.route("/coffee/add", methods=["GET", "POST"])
+def coffee_add():
+    if request.method == "POST":
+        if not user.check_role(2):
+            return render_template("error.html", error="Not authorized")
+
+        if not user.csrf():
+            return render_template("error.html", error="CSRF Token missing")
+
+        name = request.form["coffee"]
+
+        if len(name) < 1:
+            return render_template("profile.html", error="Coffee name must be longer than 0")
+
+        coffee.add_new(name)
+        return profile(session["id"], "Coffee successfully added")
+
+# FINISH THIS METHOD - REMOVE COFFEE
+@app.route("/coffee/remove", methods=["GET", "POST"])
+def coffee_remove():
+    if request.method == "POST":
+        if not user.csrf():
+            return render_template("error.html", error="CSRF Token missing")
+        coffee = request.form["coffee"]
+        if not user.check_role(2):
+            return render_template("error.html", error="Not authorized")
+
+        return profile(session["id"], "Coffee Removed")
+
 #Profile
-
-
 @app.route("/users/<id>", methods=["GET", "POST"])
-def profile(id):
-    if session and session["user_id"] == int(id):
+def profile(id, error=None):
+    if user.id() == int(id):
         user_data = user.profile(id)
-        return render_template("profile.html", user_data=user_data)
+        coffees = coffee.get_all()
+        return render_template("profile.html", user_data=user_data, error=error, coffees=coffees)
     return redirect("/")
     
-
-
 #login
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -49,6 +77,7 @@ def login():
 
         if not user.login(username.lower(), password):
             return render_template("login.html", error="Wrong username or password")
+
         return redirect("/")
 
 #Register
@@ -81,15 +110,14 @@ def register():
 
         if not reg:
             return render_template("register.html", error="Failed to register")
-        print(session)
         return redirect("/")
         
 
 @app.route("/logout")
 def logout():
     del session["username"]
-    del session["user_role"]
-    del session["user_id"]
+    del session["role"]
+    del session["id"]
     return redirect("/")
     
 if __name__ == "__main__":
