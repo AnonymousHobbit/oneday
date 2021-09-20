@@ -33,7 +33,7 @@ def coffee_add():
         if not user.check_role(2):
             return render_template("error.html", error="Not authorized")
 
-        if not user.csrf():
+if not user.csrf():
             return render_template("error.html", error="CSRF Token missing")
 
         name = request.form["coffee"]
@@ -119,6 +119,3 @@ def logout():
     del session["role"]
     del session["id"]
     return redirect("/")
-    
-if __name__ == "__main__":
-    app.run(debug=True, host='127.0.0.1')

@@ -30,3 +30,12 @@ Käytännössä kahvia rakastavien pienimuotoinen foorumi ja arvostelupalsta.
 - [ ] Remove cafes
 - [ ] Remove recipes
 - [x] Remove coffees
+
+## Deployment - Heroku
+```
+$ heroku login
+$ heroku git:remote -a <Project Name>
+$ git add .
+$ git commit -am "Heroku push"
+$ git push heroku master
+```
