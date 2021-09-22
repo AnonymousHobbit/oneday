@@ -7,32 +7,6 @@
         <div class="profileInfo">
             {% if user_data[1] == 2 %}
                 <p>You are an administrator</p>
-                
-                <h4>Add a coffee</h4>
-                {% if error %}
-                    <p class="errortext">{{ error }}</p>
-                {% endif %}
-                <form action="/coffee/add" method="POST">
-                    <input name="coffee" placeholder="Coffee name" required>
-
-                    <input type="hidden" name="csrf" value="{{ session.csrf }}">
-                    <button type="submit">Add</button>
-                </form>
-
-                {% if coffees %}
-                    <h4 class="coffeeList">Current coffees</h4>
-                    <form action="/coffee/remove" method="POST">
-                        <select name="coffee">
-                            {% for coffee in coffees %}
-                                <option value="{{ coffee[1] }}">{{ coffee[0] }}</option>
-                            {% endfor %}
-                        </select>
-                    
-                        <input type="hidden" name="csrf" value="{{ session.csrf }}">
-                        <button type="submit">Remove</button>
-                    </form>
-                    
-                {% endif %}
             {% endif %}
         </div>
         

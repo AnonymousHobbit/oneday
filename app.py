@@ -1,15 +1,15 @@
-from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request, redirect, session
 from dotenv import load_dotenv
 from os import getenv
 
-#Custom modules
+load_dotenv()  # access .env file
+
+
 app = Flask(__name__)
 app.secret_key = getenv("SECRET_KEY")
 
-
-load_dotenv()  # access .env file
-
+## Initialize Database
 db_url = getenv("DATABASE_URL")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = db_url
@@ -17,52 +17,20 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
+#Custom modules
 import user
-import coffee
 
 #Default route
 @app.route("/")
 def index():
     return render_template("index.html")
 
-
-## Coffees
-@app.route("/coffee/add", methods=["GET", "POST"])
-def coffee_add():
-    if request.method == "POST":
-        if not user.check_role(2):
-            return render_template("error.html", error="Not authorized")
-
-if not user.csrf():
-            return render_template("error.html", error="CSRF Token missing")
-
-        name = request.form["coffee"]
-
-        if len(name) < 1:
-            return render_template("profile.html", error="Coffee name must be longer than 0")
-
-        coffee.add_new(name)
-        return profile(session["id"], "Coffee successfully added")
-
-# FINISH THIS METHOD - REMOVE COFFEE
-@app.route("/coffee/remove", methods=["GET", "POST"])
-def coffee_remove():
-    if request.method == "POST":
-        if not user.csrf():
-            return render_template("error.html", error="CSRF Token missing")
-        coffee = request.form["coffee"]
-        if not user.check_role(2):
-            return render_template("error.html", error="Not authorized")
-
-        return profile(session["id"], "Coffee Removed")
-
 #Profile
 @app.route("/users/<id>", methods=["GET", "POST"])
 def profile(id, error=None):
     if user.id() == int(id):
         user_data = user.profile(id)
-        coffees = coffee.get_all()
-        return render_template("profile.html", user_data=user_data, error=error, coffees=coffees)
+        return render_template("profile.html", user_data=user_data, error=error)
     return redirect("/")
     
 #login
@@ -119,3 +87,6 @@ def logout():
     del session["role"]
     del session["id"]
     return redirect("/")
+
+if __name__ == "__main__":
+    app.run(debug=True, host='127.0.0.1')

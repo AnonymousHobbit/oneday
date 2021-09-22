@@ -1,3 +1,58 @@
+:root {
+    --text-p: rgb(187, 187, 187);
+    --text-h2: rgb(230, 230, 230);
+    --background: rgb(12, 17, 34);
+    --error: rgb(95, 95, 95);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    box-sizing: border-box;
+	font-family: Arial;
+}
+
+body {
+    background-color: var(--background);
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #191d31;
+    width: 100%;
+}
+
+.mainNavbar {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 1000px;
+    list-style: none;
+    flex-direction: row;
+}
+
+.navLinks {
+    color: var(--text-p);
+    text-decoration: none;
+    padding: 20px 16px;
+    transition: color 0.3s;
+}
+
+.mainNavbar .container {
+    display: flex;
+    align-items: center;
+}
+
+.navLinks:hover {
+	color: #838383;
+}
+
+/* Other Content */
 .content-box {
     display: flex;
     width: 100%;
@@ -16,23 +71,23 @@
     margin-top: 2rem;
 }
 
-.content-box .inline-box #regForm input {
-    padding: 5px;
-    margin: 5px 0;
-    width: 100%;
+.content-box .inline-box h2 {
+    color: var(--text-h2);
+}
+
+.content-box .inline-box p {
+    color: var(--text-p);
 }
 
 .errortext {
-    color: rgb(95, 95, 95);
+    color: var(--error);
     font-weight: bold;
     padding-left: 1rem;
     font-size: 17px;
 }
 
 .profileInfo {
-    border-top: solid black 1px;
-}
-
-.coffeeList {
     margin-top: 1rem;
+    border-top: solid white 1px;
+    color: var(--text-p);
 }
