@@ -3,11 +3,11 @@ from app import db
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import request, session
 
-
 def login(username, password):
-    sql = "SELECT password, id, role FROM users WHERE username=:username"
+    sql = "SELECT password, id FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username": username})
     user = result.fetchone()
+
     if not user:
         return False
     if not check_password_hash(user[0], password):
@@ -15,11 +15,10 @@ def login(username, password):
 
     session["id"] = user[1]
     session["username"] = username
-    session["role"] = user[2]
     session["csrf"] = os.urandom(16).hex()
     return True
 
-def register(username, password, role):
+def register(name, country, username, password):
     hash_value = generate_password_hash(password)
 
     sql = "SELECT id FROM users WHERE username=:username"
@@ -30,31 +29,33 @@ def register(username, password, role):
         return user
 
     try:
-        sql = "INSERT INTO users (username, password, role) VALUES (:username, :password, :role)"
-        db.session.execute(sql, {"username": username, "password": hash_value, "role":role})
+        sql = "INSERT INTO users (name, country, username, password) VALUES (:name, :country, :username, :password)"
+        db.session.execute(sql, {"name": name, "country": country, "username": username, "password": hash_value})
         db.session.commit()
     except:
         return False
 
     return login(username, password)
 
-def profile(id):
-    sql = "SELECT username, role FROM users WHERE id=:user_id"
-    result = db.session.execute(sql, {"user_id": id})
+def profile(username):
+    sql = "SELECT name, username, country FROM users WHERE username=:user_name"
+    result = db.session.execute(sql, {"user_name": username})
     user = result.fetchone()
     return user
 
 def id():
     return session.get("id", 0)
 
-def check_role(role):
-    if role == session.get("role", 0):
-        return True
-    else:
-        return False
-
 def csrf():
     if session.get("csrf", 0) == request.form["csrf"]:
         return True
     else:
         return False
+
+def name():
+    return session.get("username", None)
+
+def auth():
+    if session.get("id", 0) > 0 and session.get("username", None) is not None:
+        return True
+    return False

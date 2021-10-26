@@ -13,8 +13,8 @@
                 <a href="/" class="navLinks">Home</a>
             </div>
             <div class="container">
-                <a href="/users/{{ session.id }}" class="navLinks">{{ session.username }}</a>
-    
+                <a href="/{{ session.username }}" class="navLinks">{{ session.username }}</a>
+                <span>|</span>
                 <a href="/logout" class="navLinks">Logout</a>
             </div>
         </ul>

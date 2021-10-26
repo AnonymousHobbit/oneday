@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-box">
+    <div class="inline-box">
+        {% if post %}
+            <div class="post">
+                <h2>{{post[1]}} @{{post[2]}}</h2>
+                <p>{{post[3]}}</p>
+            </div>
+
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

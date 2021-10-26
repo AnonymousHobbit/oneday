@@ -1,7 +1,7 @@
-CREATE TABLE coffees (
+CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
-    name TEXT,
-    creator_id INTEGER REFERENCES users
+    content TEXT,
+    author_id INTEGER REFERENCES users
 )
 
 CREATE TABLE rating (
@@ -22,7 +22,8 @@ CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username TEXT,
     password TEXT,
-    role INTEGER
+    country TEXT,
+    name TEXT
 )
 
 CREATE TABLE cafes (
@@ -31,4 +32,3 @@ CREATE TABLE cafes (
     city TEXT,
     website TEXT,
 )
-

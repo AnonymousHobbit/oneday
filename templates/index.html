@@ -3,7 +3,23 @@
 {% block content %}
 <div class="content-box">
     <div class="inline-box">
-        <h2>Welcome to Rate My Coffee</h2>
+        <textarea name="content" form="post-form"></textarea>
+        <form method="POST" action="/posts/create" id="post-form">
+            <input type="hidden" name="csrf" value="{{ session.csrf }}">
+
+            <button type="submit">Publish</button>
+        </form>
+
+        {% if posts %}
+            {% for post in posts %}
+                <a href="/{{post[2]}}/{{post[0]}}">
+                    <div class="post">
+                        <h2>{{post[1]}} @{{post[2]}}</h2>
+                        <p>{{post[3]}}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}

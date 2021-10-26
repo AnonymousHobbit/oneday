@@ -1,4 +1,12 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+
+<head>
+    <title>pChat</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles.css') }}">
+</head>
 
 {% block content %}
 <div class="content-box">
@@ -10,8 +18,9 @@
         <form action="/login" method="POST" id="regForm">
             <input placeholder="Username" name="username" required><br>
             <input placeholder="Password" name="password" type="password" required><br>
-
+            
             <button type="submit">Login</button>
+            <p>Don't have an account? <a href="/register">Sign up</a></p>
         </form>
     </div>
 </div>

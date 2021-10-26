@@ -16,9 +16,9 @@
 	font-family: Arial;
 }
 
-body {
-    background-color: var(--background);
-}
+body { background-color: var(--background); }
+
+textarea { resize: none; }
 
 /* Navigation Bar */
 .navbar {
