@@ -1,12 +1,31 @@
-# pChat
-The most advanced social media like platform. You can use it to share your thoughts and ideas while meeting new people around the world
+# Oneday
+Bug bounty platform where user can report vulnerabilities to companies
+
+## Installation
+
+### Configuration
+Copy `src/.env.example` to `src/.env`.
+Set `DATABASE_URL` to PostgreSQL database connection string
+Set `SECRET_KEY` to application secret
+
+### Running the program
+Install all dependencies
+```
+$ pip install -r requirements.txt
+```
+
+Initialize the database
+```
+$ python src/build.py
+```
+
+Starting the application
+```
+$ python src/app.py
+```
 
 ## ToDo
 - [x] Login & register
-- [x] Profile page & roles
-- [ ] Dockerized
-- [ ] Github actions to heroku
-- [ ] Finish the schema.sql
-- [ ] Allow registered user to add posts
-- [ ] Allow anonyone to search posts
-- [ ] Users can be friends
+- [x] Profile page
+- [ ] Create an organisation
+- [ ] Submit a report

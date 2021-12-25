@@ -1,34 +1,23 @@
-CREATE TABLE posts (
+CREATE TABLE company (
     id SERIAL PRIMARY KEY,
-    content TEXT,
-    author_id INTEGER REFERENCES users
-)
-
-CREATE TABLE rating (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users,
-    cafe_id INTEGER REFERENCES cafes,
-    rating INTEGER
-)
-
-CREATE TABLE recipes (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users,
-    coffee_id INTEGER REFERENCES coffees,
-    recipe TEXT
-)
+    name VARCHAR(255) NOT NULL,
+    description TEXT
+);
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username TEXT,
-    password TEXT,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
     country TEXT,
-    name TEXT
-)
+    full_name TEXT,
+    twitter TEXT,
+    website TEXT
+);
 
-CREATE TABLE cafes (
+CREATE TABLE reports (
     id SERIAL PRIMARY KEY,
-    name TEXT,
-    city TEXT,
-    website TEXT,
-)
+    company_id INTEGER NOT NULL REFERENCES company(id),
+    rating DECIMAL NOT NULL,
+    content TEXT NOT NULL,
+    author_id INTEGER REFERENCES users(id)
+);

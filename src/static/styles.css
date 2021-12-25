@@ -1,0 +1,186 @@
+:root {
+    --text-p: rgb(187, 187, 187);
+    --text-h2: rgb(5, 4, 12);
+    --background: rgb(249, 249, 251);
+    --error: rgb(95, 95, 95);
+    --btn-color: rgb(11, 0, 47);
+    --border-color: rgb(224, 224, 224);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    box-sizing: border-box;
+	font-family: Arial;
+}
+
+body { background-color: var(--background); }
+
+textarea { resize: none; }
+
+/* Navigation Bar */
+.navbar {
+    background-color: white;
+    box-shadow: 0 5px 20px 0 rgb(0 0 0 / 6%);
+    width: 100%;
+}
+
+.mainNavbar {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 1000px;
+    list-style: none;
+    flex-direction: row;
+}
+
+.navLinks {
+    color: var(--text-p);
+    text-decoration: none;
+    padding: 20px 16px;
+    transition: color 0.3s;
+}
+
+.mainNavbar .container {
+    display: flex;
+    align-items: center;
+}
+
+.navLinks:hover {
+	color: #838383;
+}
+
+/* Other Content */
+.content-box {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+}
+
+.content-box h2 {
+    padding: 0;
+}
+
+.content-box .inline-box {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.content-box .inline-box h2 {
+    color: var(--text-h2);
+}
+
+.content-box .inline-box p {
+    color: var(--text-p);
+}
+
+.errortext {
+    color: var(--error);
+    font-weight: bold;
+    padding-left: 1rem;
+    font-size: 17px;
+}
+
+.profileInfo {
+    margin-top: 1rem;
+    border-top: solid white 1px;
+    color: var(--text-p);
+}
+
+/* Login Form */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 480px;
+    background-color: white;
+    box-shadow: 0 5px 20px 0 rgb(0 0 0 / 6%);
+}
+.login-container h2 {
+    color: var(--text-h2);
+    margin: 2.4rem;
+    font-size: 30px;
+    font-family: Montserrat, sans-serif;
+}
+
+.login-container h3 {
+    color: var(--text-h2);
+    margin: 0 2.4rem 1rem 2.4rem;
+    font-size: 15px;
+    font-family: Montserrat, sans-serif;
+}
+
+.form-control {
+    display:flex;
+    flex-direction: column;
+}
+
+.form-group .form-input {
+    padding: 10px;
+    border: solid 1px var(--border-color);
+    border-radius: 5px;
+}
+.form-group label {
+    margin-bottom: 0.5rem;
+}
+
+.form-group button {
+    width: 250px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: var(--btn-color);
+    color: white;
+    border-radius: 5px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2.4rem;
+    padding:0 2.4rem;
+}
+
+.login-container .no-account {
+    text-align: center;
+    
+}
+
+.login-container .no-account a {
+    text-decoration: none;
+    color:rgb(21, 73, 156)
+}
+
+.login-container .no-account a:hover {
+    text-decoration: underline;
+}
+
+.login-container .container {
+    color: var(--text-h2);
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    height: 100px;
+    background-color: white;
+}
+
+.register-method:hover {
+    background-color: var(--btn-color);
+    color: white;
+}
+
+.line-choices {
+    margin: 0 5rem;
+    border-bottom: 1px solid var(--border-color);
+}

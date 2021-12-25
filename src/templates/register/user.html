@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Oneday</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles.css') }}">
+</head>
+
+{% block content %}
+<div class="content-box">
+    <div class="inline-box">
+        <div class="login-container">
+            <h2>Create a new account</h2>
+            {% if error %}
+            <p class="errortext">{{ error }}</p>
+            {% endif %}
+            <form action="/users/register" method="POST" id="regForm" class="form-control">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input class="form-input" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label>Full name (optional)</label>
+                    <input class="form-input" name="full_name">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input class="form-input" name="password" type="password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Register</button>
+                </div>
+            </form>
+            <h3 class="no-account">Already have an account? <a href="/users/register">Log in!</a></h3>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

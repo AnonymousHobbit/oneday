@@ -1,5 +1,5 @@
 import os
-from app import db
+from __main__ import db
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import request, session
 
@@ -18,7 +18,7 @@ def login(username, password):
     session["csrf"] = os.urandom(16).hex()
     return True
 
-def register(name, country, username, password):
+def register(username, password, full_name):
     hash_value = generate_password_hash(password)
 
     sql = "SELECT id FROM users WHERE username=:username"
@@ -29,8 +29,9 @@ def register(name, country, username, password):
         return user
 
     try:
-        sql = "INSERT INTO users (name, country, username, password) VALUES (:name, :country, :username, :password)"
-        db.session.execute(sql, {"name": name, "country": country, "username": username, "password": hash_value})
+        sql = "INSERT INTO users (username, password, full_name) VALUES (:username, :password, :full_name)"
+        db.session.execute(
+            sql, {"username": username, "password": hash_value, "full_name": full_name})
         db.session.commit()
     except:
         return False
@@ -38,7 +39,7 @@ def register(name, country, username, password):
     return login(username, password)
 
 def profile(username):
-    sql = "SELECT name, username, country FROM users WHERE username=:user_name"
+    sql = "SELECT username, full_name, country FROM users WHERE username=:user_name"
     result = db.session.execute(sql, {"user_name": username})
     user = result.fetchone()
     return user
