@@ -12,18 +12,17 @@
 <div class="content-box">
     <div class="inline-box">
         <div class="login-container">
-            <h2 style="text-align: center;">Welcome to Oneday!</h2>
-            <h3 style="text-align: center;">Are you a hacker or a company?</h3>
+            <h2 style="text-align: center;">Welcome back to Oneday!</h2>
             {% if error %}
-                <p class="errortext">{{ error }}</p>
+            <p class="errortext">{{ error }}</p>
             {% endif %}
             <div class="line"></div>
-            <a class="container register-method" href="/users/register">
+            <a class="container register-method" href="/users/login">
                 <div>I'm a hacker</div>
             </a>
             <div class="line-choices"></div>
-            <a class="container register-method" href="/companies/register">
-                <div> I'm a company</div>
+            <a class="container register-method" href="/companies/login">
+                <div>I'm a company</div>
             </a>
         </div>
     </div>

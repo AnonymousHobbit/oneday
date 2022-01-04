@@ -25,6 +25,16 @@
                     <label>Full name (optional)</label>
                     <input class="form-input" name="full_name">
                 </div>
+                {% if countries %}
+                <div class="form-group">
+                    <label>Country</label>
+                    <select class="form-input" name="country" required>
+                        {% for country in countries %}
+                        <option value="{{ country.name.common }}">{{ country.name.common }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endif %}
                 <div class="form-group">
                     <label>Password</label>
                     <input class="form-input" name="password" type="password" required>
@@ -33,7 +43,7 @@
                     <button type="submit">Register</button>
                 </div>
             </form>
-            <h3 class="no-account">Already have an account? <a href="/users/register">Log in!</a></h3>
+            <h3 class="no-account">Already have an account? <a href="/users/login">Log in!</a></h3>
         </div>
     </div>
 </div>

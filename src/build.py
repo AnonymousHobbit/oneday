@@ -12,7 +12,7 @@ try:
 
     print("[+] Removing all tables")
     cursor.execute("DROP TABLE IF EXISTS reports CASCADE")
-    cursor.execute("DROP TABLE IF EXISTS organisations CASCADE")
+    cursor.execute("DROP TABLE IF EXISTS companies CASCADE")
     cursor.execute("DROP TABLE IF EXISTS users CASCADE")
     
     print("[+] Creating all tables")

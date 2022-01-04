@@ -1,5 +1,5 @@
 :root {
-    --text-p: rgb(187, 187, 187);
+    --text-p: rgb(0, 0, 0);
     --text-h2: rgb(5, 4, 12);
     --background: rgb(249, 249, 251);
     --error: rgb(95, 95, 95);
@@ -73,7 +73,6 @@ textarea { resize: none; }
     flex-direction: column;
     max-width: 500px;
     width: 100%;
-    margin-top: 2rem;
 }
 
 .content-box .inline-box h2 {
@@ -115,7 +114,7 @@ textarea { resize: none; }
 
 .login-container h3 {
     color: var(--text-h2);
-    margin: 0 2.4rem 1rem 2.4rem;
+    margin: 0 2.4rem 2.4rem 2.4rem;
     font-size: 15px;
     font-family: Montserrat, sans-serif;
 }
@@ -183,4 +182,29 @@ textarea { resize: none; }
 .line-choices {
     margin: 0 5rem;
     border-bottom: 1px solid var(--border-color);
+}
+
+#report {
+    margin-top: 2rem;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+#report .report-container{
+    max-width: 1000px;
+    width: 100%;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 5px 20px 0 rgb(0 0 0 / 6%);
+}
+
+#report .report-input {
+    padding: 10px;
+    border: solid 1px var(--border-color);
+    border-radius: 5px;
+}
+
+#report .big-area{
+    height: 200px;
 }

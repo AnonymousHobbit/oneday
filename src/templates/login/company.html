@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-    <title>pChat</title>
+    <title>Oneday</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +12,11 @@
 <div class="content-box">
     <div class="inline-box">
         <div class="login-container">
-            <h2>Welcome back!</h2>
+            <h2>Login to your company account</h2>
             {% if error %}
-                <p class="errortext">{{ error }}</p>
+            <p class="errortext">{{ error }}</p>
             {% endif %}
-            <form action="/users/login" method="POST" id="regForm" class="form-control">
+            <form action="/companies/login" method="POST" id="regForm" class="form-control">
                 <div class="form-group">
                     <label>Username</label>
                     <input class="form-input" name="username" required>
@@ -24,12 +24,12 @@
                 <div class="form-group">
                     <label>Password</label>
                     <input class="form-input" name="password" type="password" required>
-                </div> 
+                </div>
                 <div class="form-group">
                     <button type="submit">Login</button>
                 </div>
             </form>
-            <h3>Dont have an account? <a class="no-account" href="/register">Create one!</a></h3>
+            <h3 class="no-account">Dont have an account? <a href="/register">Create one!</a></h3>
         </div>
     </div>
 </div>

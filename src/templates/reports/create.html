@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div id="report">
+    <div class="report-container">
+        <div class="form-group">
+            <h1>Title</h1>
+            <input class="report-input" name="title" required>
+        </div>
+        <div class="form-group">
+            <h1>Endpoint (optional)</h1>
+            <input class="report-input" name="endpoint" >
+        </div>
+        <div class="form-group">
+            <h1>Description</h1>
+            <textarea class="report-input big-area" name="description" required></textarea>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

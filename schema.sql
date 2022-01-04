@@ -1,14 +1,19 @@
-CREATE TABLE company (
+CREATE TABLE companies (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description TEXT
+    name TEXT NOT NULL,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
+    email TEXT NOT NULL,
+    country TEXT NOT NULL,
+    role TEXT NOT NULL
 );
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username TEXT NOT NULL,
     password TEXT NOT NULL,
-    country TEXT,
+    country TEXT NOT NULL,
+    role TEXT NOT NULL,
     full_name TEXT,
     twitter TEXT,
     website TEXT
@@ -16,8 +21,10 @@ CREATE TABLE users (
 
 CREATE TABLE reports (
     id SERIAL PRIMARY KEY,
-    company_id INTEGER NOT NULL REFERENCES company(id),
-    rating DECIMAL NOT NULL,
-    content TEXT NOT NULL,
-    author_id INTEGER REFERENCES users(id)
+    title TEXT NOT NULL,
+    endpoint TEXT,
+    description TEXT NOT NULL,
+    score INTEGER NOT NULL,
+    company_id INTEGER NOT NULL REFERENCES companies(id),
+    user_id INTEGER REFERENCES users(id)
 );

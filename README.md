@@ -26,6 +26,8 @@ $ python src/app.py
 
 ## ToDo
 - [x] Login & register
-- [x] Profile page
+- [ ] Profile page
 - [ ] Create an organisation
+- [ ] Organisation home page
+- [ ] Display reports in profile.
 - [ ] Submit a report

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-box">
+    <div class="inline-box">
+        {% if company and user %}
+            <h1>{{ company[1] }}</h1>
+            {% if user[1] == "user" %}
+                <div class="reportBtn">
+                    <a href="/users/{{user[0]}}/reports/{{company[0]}}/create">Create a report</a>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        
+    </div>
+</div>
+{% endblock %}
