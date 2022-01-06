@@ -9,7 +9,7 @@ def register_user(username, full_name, country, password):
 
     }
 
-    r = requests.post("http://localhost:5000/users/register", data=data)
+    requests.post("http://localhost:5000/users/register", data=data)
     print("[+] User registered")
 
 
@@ -22,7 +22,7 @@ def register_company(name, username, email, country, password):
         "password": password
     }
 
-    r = requests.post("http://localhost:5000/companies/register", data=data)
+    requests.post("http://localhost:5000/companies/register", data=data)
     print("[+] Company registered")
 
 if __name__ == "__main__":

@@ -56,7 +56,7 @@ def register():
         if companies.register(name, username, email, country, password):
             return redirect("/")
 
-        if companies.username() is not None:
+        if common.username() is not None:
             return redirect("/")
 
     return render_template("register/company.html", countries=countries)

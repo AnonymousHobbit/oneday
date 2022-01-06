@@ -11,7 +11,8 @@ def report_create(username, company_name):
     if request.method == "GET":
         if not common.auth():
             return redirect("/users/login")
-        return render_template("reports/create.html")
+        data = [username, company_name]
+        return render_template("reports/create.html", data=data)
 
 #Profile
 @user_page.route("/<username>", methods=["GET", "POST"])
@@ -22,7 +23,7 @@ def profile(username, error=None):
     user_data = users.profile(username)
 
     if user_data is None:
-        return render_template("user_profile.html", user=[username], error=error)
+        return render_template("user_profile.html", user=username, error=error)
     # user_posts=user_posts
     return render_template("user_profile.html", user=user_data, error=error)
 

@@ -44,7 +44,7 @@ def register(name, username, email, country, password):
 
 
 def profile(username):
-    sql = "SELECT username, name, country FROM companies WHERE username=:username"
+    sql = "SELECT id, username, name, country FROM companies WHERE username=:username"
     result = db.session.execute(sql, {"username": username})
     user = result.fetchone()
     return user
