@@ -25,6 +25,8 @@ def register_company(name, username, email, country, password):
     requests.post("http://localhost:5000/companies/register", data=data)
     print("[+] Company registered")
 
+
+
 if __name__ == "__main__":
-    register_user("test", "Test Tester", "Finland", "root")
+    register_user("admin", "Test Tester", "Finland", "admin")
     register_company("Red Bull", "redbull", "redbull@test.com", "Austria", "root")

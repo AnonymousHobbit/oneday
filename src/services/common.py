@@ -8,8 +8,8 @@ def id():
     return session.get("id", 0)
 
 
-def csrf():
-    if session.get("csrf", 0) == request.form["csrf"]:
+def csrf_check():
+    if session.get("csrf", 0) == request.form["csrf_token"]:
         return True
     return False
 

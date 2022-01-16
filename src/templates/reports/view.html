@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div id="report">
+    <div class="report-container">
+        {% if error %}
+        <p class="errortext">{{ error }}</p>
+        {% endif %}
+        {% if data %}
+
+            <div class="report-info">
+                <h2>{{ data[1] }}</h2>
+                <div class="container">
+                    <h2>Created</h2>
+                    <div class="value">
+                        <p>{{ data[7] }}</p>
+                    </div>
+                </div>
+                <div class="container">
+                    <h2>Status</h2>
+                    <div class="value">
+                        <p class="{{data[5]}}">{{ data[5] }}</p>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <h2>Company</h2>
+                    <div class="value">
+                        <p><a href="/companies/{{ data[6] }}">{{ data[6] }}</a></p>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <h2>severity</h2>
+                    <div class="value">
+                        <p class="{{data[3]}}">{{ data[3] }}</p>
+                    </div>
+                </div>
+            </div>
+            {% if data[2] %}
+                <div class="form-group">
+                    <label>Endpoint (optional)</label>
+                    <div class="report-group">
+                        <p>{{data[2]}}</p>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="form-group">
+                <label>Description and impact</label>
+                <div class="report-group">
+                    <p>{{data[4]}}</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

@@ -7,6 +7,15 @@
             <h2>{{ user[0] }}</h2>
             <p>{{ user[1] }}</p>
         {% endif %}
+        {% if reports %}
+            <ul>
+                {% for report in reports %}
+                    <li>
+                        <a href="/users/{{user[0]}}/reports/{{report[0]}}">{{ report[1] }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

@@ -8,12 +8,10 @@
             {% if user[1] == "user" %}
             
                 <div class="reportBtn">
-                    <a href="/users/{{user[0]}}/reports/{{company[0]}}/create">Create a report</a>
+                    <a href="/users/{{user[0]}}/reports/{{company[1]}}/create">Create a report</a>
                 </div>
             {% endif %}
-        {% endif %}
-
-        
+        {% endif %}      
     </div>
 </div>
 {% endblock %}

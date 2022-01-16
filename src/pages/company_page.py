@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, session, abort
 import requests
 
 import services.users as users
@@ -7,6 +7,18 @@ import services.companies as companies
 import services.common as common
 
 company_page = Blueprint("company_page", __name__, url_prefix="/companies")
+
+
+#Profile
+@company_page.route("/<username>", methods=["GET", "POST"])
+def profile(username, error=None):
+    if not common.auth():
+        return redirect("/login")
+    user_data = [common.username(), common.role()]
+    company_data = companies.profile(username)
+    if company_data is None:
+        return abort(404)
+    return render_template("company_profile.html", company=company_data, user=user_data, error=error)
 
 
 @company_page.route("/login", methods=["GET", "POST"])
@@ -62,14 +74,6 @@ def register():
     return render_template("register/company.html", countries=countries)
 
 
-#Profile
-@company_page.route("/<username>", methods=["GET", "POST"])
-def profile(username, error=None):
-    if not common.auth():
-        return redirect("/login")
-    user_data = [common.username(), common.role()]
-    company_data = companies.profile(username)
-    return render_template("company_profile.html", company=company_data, user=user_data, error=error)
 
 @company_page.route("/logout")
 def logout():

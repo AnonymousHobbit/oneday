@@ -45,3 +45,13 @@ def profile(username):
     result = db.session.execute(sql, {"username": username})
     user = result.fetchone()
     return user
+
+def get_reports(username):
+    try:
+        sql = "SELECT id, title FROM reports WHERE user_name=:username"
+        result = db.session.execute(sql, {"username": username})
+        db.session.commit()
+        reports = result.fetchall()
+        return reports
+    except:
+        return False

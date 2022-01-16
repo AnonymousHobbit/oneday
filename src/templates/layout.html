@@ -13,9 +13,15 @@
                 <a href="/" class="navLinks">Home</a>
             </div>
             <div class="container">
-                <a href="/users/{{ session.username }}" class="navLinks">{{ session.username }}</a>
-                <span>|</span>
-                <a href="/users/logout" class="navLinks">Logout</a>
+                {% if session.role == "user"%}
+                    <a href="/users/{{ session.username }}" class="navLinks">{{ session.username }}</a>
+                    <span>|</span>
+                    <a href="/users/logout" class="navLinks">Logout</a>
+                {% else %}
+                    <a href="/companies/{{ session.username }}" class="navLinks">{{ session.username }}</a>
+                    <span>|</span>
+                    <a href="/companies/logout" class="navLinks">Logout</a>
+                {% endif %}
             </div>
         </ul>
     </nav>
