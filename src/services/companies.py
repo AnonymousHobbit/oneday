@@ -48,3 +48,25 @@ def profile(username):
     result = db.session.execute(sql, {"username": username})
     user = result.fetchone()
     return user
+
+def is_authenticated(username):
+   
+    if username == session.get("username", None):
+        return True
+    return False
+
+def add_scope(url):
+    sql = "INSERT INTO scope (url, company_id) VALUES (:url, :company_id)"
+    db.session.execute(sql, {"url": url, "company_id": session["id"]})
+    db.session.commit()
+
+def get_scope(username):
+    sql = "SELECT id, url FROM scope WHERE company_id=(select id from companies where username=:username)"
+    result = db.session.execute(sql, {"username": username})
+    scope = result.fetchall()
+    return scope
+
+def delete_scope(id):
+    sql = "DELETE FROM scope WHERE id=:id"
+    db.session.execute(sql, {"id": id})
+    db.session.commit()

@@ -10,15 +10,45 @@ company_page = Blueprint("company_page", __name__, url_prefix="/companies")
 
 
 #Profile
+@company_page.route("/<company_name>/edit/scope/add", methods=["POST"])
+def scope_add(company_name):
+    if not common.auth():
+        return redirect("/login")
+
+    common.csrf_check()
+
+    url = request.form["url"]
+    companies.add_scope(url)
+
+    return redirect(f"/companies/{company_name}")
+
+
+@company_page.route("/<company_name>/edit/scope/delete", methods=["POST"])
+def scope_delete(company_name):
+    if not common.auth():
+        return redirect("/login")
+
+    common.csrf_check()
+    url = request.form["url_id"]
+    companies.delete_scope(url)
+
+    return redirect(f"/companies/{company_name}")
+
 @company_page.route("/<username>", methods=["GET", "POST"])
 def profile(username, error=None):
     if not common.auth():
         return redirect("/login")
-    user_data = [common.username(), common.role()]
+
+    permissions = None
+    if common.role() == "company" and companies.is_authenticated(username):
+        permissions = True
+
+    user_data = [common.username(), common.role(), permissions]
     company_data = companies.profile(username)
+    scope = companies.get_scope(username)
     if company_data is None:
         return abort(404)
-    return render_template("company_profile.html", company=company_data, user=user_data, error=error)
+    return render_template("company_profile.html", company=company_data, user=user_data, scope=scope, error=error)
 
 
 @company_page.route("/login", methods=["GET", "POST"])
@@ -62,11 +92,11 @@ def register():
         
         #Check if country exists
         if len(country) == 0:
-            return render_template("register/user.html", error="Please select your country", countries=countries)
+            return render_template("register/company.html", error="Please select your country", countries=countries)
         
         #Check if registration was successful
         if companies.register(name, username, email, country, password):
-            return redirect("/")
+            return render_template("register/company.html", error="Company already exists", countries=countries)
 
         if common.username() is not None:
             return redirect("/")

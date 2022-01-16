@@ -22,3 +22,4 @@ def auth():
     if session.get("id", 0) > 0 and session.get("username", None) is not None:
         return True
     return False
+

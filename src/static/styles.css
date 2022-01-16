@@ -191,6 +191,8 @@ textarea { resize: none; }
     border-bottom: 1px solid var(--border-color);
 }
 
+/* Report view */
+
 #report {
     margin-top: 2rem;
     display: flex;
@@ -198,7 +200,7 @@ textarea { resize: none; }
     justify-content: center;
 }
 
-#report .report-container{
+#report .report-container {
     max-width: 1000px;
     width: 100%;
     padding: 1rem;
@@ -217,19 +219,42 @@ textarea { resize: none; }
 }
 
 #report .report-container .report-group {
+    display: flex;
     background-color: var(--background);
     padding: 1rem;
+    margin: 0.5rem 0;
     border-radius: 5px;
+}
+
+#report .report-container .report-group .scope_domain {
+    margin-left: 1rem;
 }
 
 #report .report-container .report-info {
     padding: 2.4rem;
 }
+#report .report-container .report-info h1 {
+    font-size: 30px;
+    margin-bottom: 2.4rem;
+}
+
 #report .report-container .report-info .container {
     display: flex;
+    align-items: center;
 }
+
 #report .report-container .report-info .container h2 {
-    flex: 0 0 10rem;
+    flex: 0 0 7rem;
+    margin: 0.2rem 0;
+}
+
+#report .report-container .report-info .container a {
+    text-decoration: none;
+    color: rgb(28, 129, 187);
+}
+
+#report .report-container .report-info .container a:hover {
+    text-decoration: underline;
 }
 
 
@@ -260,3 +285,91 @@ textarea { resize: none; }
     color: var(--accepted);
 }
 /* End of color palette*/
+
+/* Profile page */
+
+#profile {
+    margin-top: 3rem;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+}
+
+#profile .header {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    width: 100%;
+    padding: 1rem;
+}
+
+#profile .header h1{
+    font-size: 30px;
+}
+
+#profile .header .btn-style {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    border-radius: 0;
+}
+
+#profile .container {
+    max-width: 1000px;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 2.4rem;
+    background-color: white;
+    box-shadow: 0 5px 20px 0 rgb(0 0 0 / 6%);
+}
+#profile .container .report {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+#profile .container .report a {
+    text-decoration: none;
+    color: rgb(28, 129, 187);
+    transition: 0.3s;
+}
+#profile .container .report a:hover {
+    color:rgb(112, 112, 112);
+    transition: 0.3s;
+}
+#profile .container .info {
+    margin-top: 1rem;
+}
+
+#profile .container .scope {
+    margin: 0.5rem 0 0.5rem 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+#profile .container .scope li {
+    margin-right: 0.7rem;
+}
+
+.btn-style {
+    padding: 10px;
+    background-color: var(--btn-color);
+    border-radius: 5px;
+    justify-content: center;
+    color: white;
+
+}
+
+.btn-style a {
+    text-decoration: none;
+    color: white;
+}
+
+#profile .edit .form-input {
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+    padding: 5px 10px;
+    border: solid 1px var(--border-color);
+    border-radius: 5px;
+}

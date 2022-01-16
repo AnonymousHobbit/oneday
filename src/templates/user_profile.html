@@ -1,21 +1,16 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="content-box">
-    <div class="inline-box">
-        {% if user %}
-            <h2>{{ user[0] }}</h2>
-            <p>{{ user[1] }}</p>
-        {% endif %}
-        {% if reports %}
-            <ul>
-                {% for report in reports %}
-                    <li>
-                        <a href="/users/{{user[0]}}/reports/{{report[0]}}">{{ report[1] }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </div>
+<div id="profile">
+    {% if reports %}
+        {% for report in reports %}
+            <div class="container">
+                <div class="report">
+                    <p>Submission <a href="/users/{{user[0]}}/reports/{{report[0]}}">{{ report[1] }}</a> to <a href="/companies/{{report[3]}}">{{report[4]}}</a></p>
+                    <p>{{report[2]}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}

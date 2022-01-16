@@ -22,6 +22,7 @@ CREATE TABLE users (
 CREATE TABLE reports (
     id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
+    domain TEXT NOT NULL,
     endpoint TEXT,
     description TEXT NOT NULL,
     severity TEXT NOT NULL,
@@ -33,6 +34,6 @@ CREATE TABLE reports (
 
 CREATE TABLE scope (
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL,
+    url TEXT NOT NULL,
     company_id INTEGER NOT NULL REFERENCES companies(id)
 );

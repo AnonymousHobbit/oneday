@@ -48,7 +48,7 @@ def profile(username):
 
 def get_reports(username):
     try:
-        sql = "SELECT id, title FROM reports WHERE user_name=:username"
+        sql = "SELECT R.id, R.title, R.date, C.username, C.name FROM reports R LEFT JOIN companies C ON R.company_name = C.username WHERE user_name=:username"
         result = db.session.execute(sql, {"username": username})
         db.session.commit()
         reports = result.fetchall()

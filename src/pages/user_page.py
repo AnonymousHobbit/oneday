@@ -4,6 +4,7 @@ import requests
 import services.users as users
 import services.common as common
 import services.reports as reports
+import services.companies as companies
 user_page = Blueprint("user_page", __name__, url_prefix="/users")
 
 @user_page.route("/<username>/reports/<report_id>", methods=["GET", "POST"])
@@ -12,18 +13,19 @@ def report(username, report_id):
         return redirect("/login")
     user_data = [common.username(), common.role()]
     report_data = reports.get_full(report_id)
-    print(report_data)
     if report_data is None:
         return abort(404)
     return render_template("reports/view.html", data=report_data, user=user_data)
 
 @user_page.route("/<username>/reports/<company_name>/create", methods=["GET", "POST"])
 def report_create(username, company_name):
+    scope = companies.get_scope(company_name)
+    data = [username, company_name]
     if request.method == "GET":
         if not common.auth():
             return redirect("/users/login")
-        data = [username, company_name]
-        return render_template("reports/create.html", data=data)
+        
+        return render_template("reports/create.html", data=data, scope=scope)
     
     if request.method == "POST":
         
@@ -33,13 +35,13 @@ def report_create(username, company_name):
         common.csrf_check()
 
         title = request.form["title"]
+        domain = request.form["domain"]
         endpoint = request.form["endpoint"] or None
         description = request.form["description"]
         severity = request.form["severity"]
         status = "open"
-        data = [username, company_name]
 
-        if not reports.create(title, endpoint, description, severity, status, data):
+        if not reports.create(title, domain, endpoint, description, severity, status, data):
             return render_template("reports/create.html", data=data, error="Something went wrong")
         
         return redirect(f"/users/{username}")

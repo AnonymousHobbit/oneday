@@ -1,17 +1,72 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="content-box">
-    <div class="inline-box">
-        {% if company and user %}
-            <h1>{{ company[2] }}</h1>
+<div id="profile">
+    {% if company and user %}
+        <div class="header">
+            <h1>Welcome to {{ company[2] }}</h1>
             {% if user[1] == "user" %}
-            
-                <div class="reportBtn">
-                    <a href="/users/{{user[0]}}/reports/{{company[1]}}/create">Create a report</a>
+                {% if scope|length > 0 %}
+                <div class="btn-style">
+                    <a href="/users/{{user[0]}}/reports/{{company[1]}}/create">Submit report</a>
                 </div>
+                {% endif %}
             {% endif %}
-        {% endif %}      
-    </div>
+        </div>
+        
+        <div class="container">
+            <div class="edit">
+                <h2>Scope</h2>
+                    {% if scope|length > 0 %}
+                        <div class="info">
+                            {% for url in scope %}
+                            <div class="scope">
+                                <li value="{{url[0]}}">{{ url[1] }}</li>
+                                {% if user[2] %}
+                                <form action="/companies/{{user[0]}}/edit/scope/delete" method="post">
+                                    <input type="hidden" name="url_id" value="{{url[0]}}">
+                                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                                    <button class="btn-style" type="submit" value="Delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </form>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% if user[2] %}
+                <form method="POST" action="/companies/{{user[0]}}/edit/scope/add">
+                    <input name="url" class="form-input">
+                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                    <button type="submit" class="btn-style">Add</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="container">
+            <div>
+                <h2>Rules</h2>
+                <div class="info">
+                    <p>{{ company[3] }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div>
+                <h2>Rewards</h2>
+                <div class="info">
+                    <p>{{ company[3] }}</p>
+                </div>
+            </div>
+        </div>
+        {% if user[2] %}
+        <div class="edit">
+            <a class="btn-style" href="/companies/{{user[0]}}/edit">Edit Profile</a>
+        </div>
+        {% endif %}
+
+        
+    {% endif %}   
 </div>
 {% endblock %}

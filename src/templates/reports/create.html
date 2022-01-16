@@ -13,6 +13,15 @@
                 <input class="report-input" name="title" required>
             </div>
             <div class="form-group">
+                <label>Select a domain</label>
+                {% for domain in scope %}
+                <div class="report-group">
+                    <input type="radio" name="domain" value="{{domain[1]}}" required>
+                    <p class="scope_domain">{{domain[1]}}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
                 <label>Endpoint (optional)</label>
                 <input class="report-input" name="endpoint" >
             </div>
