@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div id="profile">
+    <h1 class="company-info">List of companies</h1>
+    {% if companies %}
+        {% for company in companies %}
+            <a class="container company" href="/companies/{{ company[0] }}">
+                <div class="info">
+                    <h1>{{ company[1] }}</h1>
+                    <h2></h2>
+                </div>
+            </a>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

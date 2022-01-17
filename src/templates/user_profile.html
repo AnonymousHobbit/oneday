@@ -4,11 +4,27 @@
 <div id="profile">
     {% if user %}
     <div class="profile-info">
-        <h1>{{ user[0] }}</h1>
+        <div class="container">
+            <h1>{{ user[0] }}</h1>
+        </div>
+
         {% if user[1] %}
-            <h3>{{user[1]}}</h3>
+        <div class="container">
+            <h2>Full name</h2>
+            <div class="value">
+                <p>{{ user[1] }}</p>
+            </div>
+        </div>
         {% endif %}
-            <h3></i>{{user[2]}}</h3>
+
+        <div class="container">
+            <h2>Country</h2>
+            <div class="value">
+                <p>{{ user[2] }}</p>
+            </div>
+        </div>
+        
+        
     </div>
     {% endif %}
 

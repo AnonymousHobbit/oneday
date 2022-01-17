@@ -14,9 +14,7 @@ CREATE TABLE users (
     password TEXT NOT NULL,
     country TEXT NOT NULL,
     role TEXT NOT NULL,
-    full_name TEXT,
-    twitter TEXT,
-    website TEXT
+    full_name TEXT
 );
 
 CREATE TABLE reports (

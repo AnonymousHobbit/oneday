@@ -39,3 +39,10 @@ def close(report_id, status):
         return True
     except:
         return False
+
+def latest(username):
+    sql = "SELECT EXTRACT(HOUR FROM (NOW() - date)) FROM reports WHERE company_name=:username ORDER BY date DESC LIMIT 1"
+    result = db.session.execute(sql, {"username": username})
+    report = result.fetchone()
+    return report
+

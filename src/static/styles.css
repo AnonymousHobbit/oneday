@@ -324,11 +324,11 @@ textarea { resize: none; }
     border-radius: 0;
 }
 
-#profile .container {
+#profile > .container {
     max-width: 1000px;
     width: 100%;
     padding: 1rem;
-    margin-top: 2.4rem;
+    margin-top: 1.5rem;
     background-color: white;
     box-shadow: 0 5px 20px 0 rgb(0 0 0 / 6%);
 }
@@ -336,6 +336,31 @@ textarea { resize: none; }
     display: flex;
     justify-content: space-between;
     padding: 5px;
+}
+
+#profile .profile-info .container {
+    display: flex;
+    align-items: center;
+}
+
+#profile .profile-info .container h2 {
+    flex: 0 0 7rem;
+    margin: 0.2rem 0;
+    font-weight:bold;
+}
+
+#profile .company {
+    text-decoration: none;
+    color: rgb(28, 129, 187);
+}
+
+#profile .company-info {
+    font-size: 30px;
+}
+
+#profile .profile-info h1 {
+    font-size: 30px;
+    margin-bottom: 1rem;
 }
 
 #profile .container .report a {

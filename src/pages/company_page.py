@@ -9,6 +9,7 @@ import services.common as common
 company_page = Blueprint("company_page", __name__, url_prefix="/companies")
 
 
+
 #Profile
 @company_page.route("/<company_name>/edit/scope/add", methods=["POST"])
 def scope_add(company_name):
@@ -20,6 +21,14 @@ def scope_add(company_name):
 
     return redirect(f"/companies/{company_name}")
 
+
+@company_page.route("/", methods=["GET"], strict_slashes=False)
+def index_page():
+    if not common.auth():
+        return redirect("/login")
+    company = companies.get_all()
+    print(company)
+    return render_template("companies.html", companies=company)
 
 @company_page.route("/<company_name>/edit/scope/delete", methods=["POST"])
 def scope_delete(company_name):

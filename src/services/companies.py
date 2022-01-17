@@ -1,16 +1,14 @@
 import os
 from __main__ import db
-from flask import request, session
+from flask import session
 from werkzeug.security import check_password_hash, generate_password_hash
-
-import services.reports as reports
-import services.users as users
 
 def find(username):
     sql = "SELECT id FROM companies WHERE username=:username"
     result = db.session.execute(sql, {"username": username})
     company = result.fetchone()
     return company
+
 
 
 def login(username, password):
@@ -71,3 +69,11 @@ def delete_scope(id):
     sql = "DELETE FROM scope WHERE id=:id"
     db.session.execute(sql, {"id": id})
     db.session.commit()
+
+
+def get_all():
+
+    sql = "SELECT DISTINCT C.username, C.name, (SELECT ABS(NOW()::date - date::date) FROM reports WHERE C.username = company_name ORDER BY date ASC LIMIT 1) FROM companies C LEFT JOIN reports R ON C.username = R.company_name"
+    result = db.session.execute(sql)
+    companies = result.fetchall()
+    return companies
