@@ -11,7 +11,7 @@ def create(title, domain, endpoint, description, severity, status, data):
         return False
 
 def get_full(id):
-    sql = "SELECT R.id, R.title, R.endpoint, R.severity, R.description, R.status, R.domain, C.name, TO_CHAR(NOW() :: DATE, 'dd / mm / yyyy'), C.username FROM reports R LEFT JOIN companies C ON R.company_name = C.username WHERE R.id=:id"
+    sql = "SELECT R.id, R.title, R.endpoint, R.severity, R.description, R.status, R.domain, C.name, TO_CHAR(R.date, 'dd / mm / yyyy'), C.username, R.user_name FROM reports R LEFT JOIN companies C ON R.company_name = C.username WHERE R.id=:id"
     result = db.session.execute(sql, {"id": id})
     report = result.fetchone()
     return report

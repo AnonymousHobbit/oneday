@@ -21,12 +21,12 @@
                         <p class="{{data[5]}}">{{ data[5] }}</p>
                     </div>
                     {% if data[5] == "open" and user[1] == "company" %}
-                    <form action="/users/{{user[0]}}/reports/{{data[0]}}/edit" method="post">
+                    <form action="/users/{{data[10]}}/reports/{{data[0]}}/edit" method="post">
                         <input type="hidden" name="csrf_token" value="{{ session.csrf }}">
                         <button type="submit" name=status class="accept-btn" value="accepted">accept</button>
                     </form>
 
-                    <form action="/users/{{user[0]}}/reports/{{data[0]}}/edit" method="post">
+                    <form action="/users/{{data[10]}}/reports/{{data[0]}}/edit" method="post">
                         <input type="hidden" name="csrf_token" value="{{ session.csrf }}">
                         <button type="submit" name="status" class="close-btn" value="closed">Close</button>
                     </form>

@@ -12,16 +12,22 @@
         <ul class="mainNavbar">
             <div class="container">
                 <a href="/" class="navLinks">Home</a>
+                {% if session %}
+
+                    <a href="/companies" class="navLinks">Companies</a>
+                {% endif %}
             </div>
             <div class="container">
                 {% if session.role == "user"%}
                     <a href="/users/{{ session.username }}" class="navLinks">{{ session.username }}</a>
                     <span>|</span>
                     <a href="/users/logout" class="navLinks">Logout</a>
-                {% else %}
+                {% elif session.role == "company" %}
                     <a href="/companies/{{ session.username }}" class="navLinks">{{ session.username }}</a>
                     <span>|</span>
                     <a href="/companies/logout" class="navLinks">Logout</a>
+                {% else %}
+                    <a href="/login" class="navLinks">Login</a>
                 {% endif %}
             </div>
         </ul>

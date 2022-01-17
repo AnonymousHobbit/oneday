@@ -12,13 +12,13 @@ def index():
     role = common.role()
     username = common.username()
 
-    if not common.auth():
-        return redirect("/login")
-    if role == "company":
-        return redirect(f"/companies/{username}")
-
-    if role == "user":
-        return redirect(f"/users/{username}")
+    if common.auth():
+        if role == "company":
+            return redirect(f"/companies/{username}")
+        
+        if role == "user":
+            return redirect(f"/users/{username}")
+    return render_template("index.html", role=role, username=username)
 
 @home_page.route("/register")
 def register():

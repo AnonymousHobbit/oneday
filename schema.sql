@@ -4,6 +4,7 @@ CREATE TABLE companies (
     username TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
     email TEXT NOT NULL,
+    description TEXT,
     country TEXT NOT NULL,
     role TEXT NOT NULL
 );

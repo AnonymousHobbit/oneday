@@ -8,8 +8,6 @@ import services.common as common
 
 company_page = Blueprint("company_page", __name__, url_prefix="/companies")
 
-
-
 #Profile
 @company_page.route("/<company_name>/edit/scope/add", methods=["POST"])
 def scope_add(company_name):
@@ -22,12 +20,21 @@ def scope_add(company_name):
     return redirect(f"/companies/{company_name}")
 
 
+@company_page.route("/<company_name>/edit/description", methods=["POST"])
+def edit_description(company_name):
+    if not common.auth():
+        return redirect("/login")
+    common.csrf_check()
+    description = request.form["description"]
+    companies.update_description(company_name, description)
+    
+
+    return redirect(f"/companies/{company_name}")
 @company_page.route("/", methods=["GET"], strict_slashes=False)
 def index_page():
     if not common.auth():
         return redirect("/login")
     company = companies.get_all()
-    print(company)
     return render_template("companies.html", companies=company)
 
 @company_page.route("/<company_name>/edit/scope/delete", methods=["POST"])
@@ -53,10 +60,11 @@ def profile(username, error=None):
 
     user_data = [common.username(), common.role(), permissions]
     company_data = companies.profile(username)
+    report_list = companies.get_reports_list(username)
     scope = companies.get_scope(username)
     if company_data is None:
         return abort(404)
-    return render_template("company_profile.html", company=company_data, user=user_data, scope=scope, error=error)
+    return render_template("company_profile.html", company=company_data, user=user_data, scope=scope, reports=report_list, error=error)
 
 
 @company_page.route("/login", methods=["GET", "POST"])

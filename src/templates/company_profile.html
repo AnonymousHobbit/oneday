@@ -13,10 +13,27 @@
                 {% endif %}
             {% endif %}
         </div>
+        <div class="profile-info">
+        
+            <div class="container">
+                <h2>Country</h2>
+                <div class="value">
+                    <p>{{ company[3] }}</p>
+                </div>
+            </div>
+        
+            <div class="container">
+                <h2>Contact</h2>
+                <div class="value">
+                    <p>{{ company[4] }}</p>
+                </div>
+            </div>
+        
+        </div>
         
         <div class="container">
             <div class="edit">
-                <h2>Scope</h2>
+                <h2><span>Scope</span></h2>
                     {% if scope|length > 0 %}
                         <div class="info">
                             {% for url in scope %}
@@ -44,29 +61,39 @@
         </div>
 
         <div class="container">
-            <div>
-                <h2>Rules</h2>
+            <div class="edit">
+                <h2><span>Description</span></h2>
+                {% if user[2] %}
                 <div class="info">
-                    <p>{{ company[3] }}</p>
+                    <form class="column" method="POST" action="/companies/{{user[0]}}/edit/description">
+                        <textarea class="form-input" name="description" class="form-input">{{ company[5] }}</textarea>
+                        <input type="hidden" name="csrf_token" value="{{ session.csrf }}">
+                        <button type="submit" class="btn-style">Save</button>
+                    </form>
                 </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div>
-                <h2>Rewards</h2>
+                {% else %}
                 <div class="info">
-                    <p>{{ company[3] }}</p>
+                    <pre>{{ company[5] }}</pre>
                 </div>
+                {% endif %}
             </div>
         </div>
         {% if user[2] %}
-        <div class="edit">
-            <a class="btn-style" href="/companies/{{user[0]}}/edit">Edit Profile</a>
-        </div>
+            {% if reports %}
+                {% for report in reports %}
+                <div class="container">
+                    <div class="report">
+                        <p><a href="/users/{{report[3]}}/reports/{{report[0]}}">{{ report[1] }}</a></p>
+                        <div class="right-info">
+                            <p class="item {{report[2]}}">{{report[2]}}</p>
+                            <p class="item">{{report[4]}}</p>
+                        </div>
+                
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
         {% endif %}
-
-        
     {% endif %}   
 </div>
 {% endblock %}

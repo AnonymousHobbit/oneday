@@ -3,7 +3,20 @@
 {% block content %}
 <div class="content-box">
     <div class="inline-box">
-        
+        <div class="login-container">
+            <h2 style="text-align: center;">Welcome to OneDay!</h2>
+            {% if error %}
+            <p class="errortext">{{ error }}</p>
+            {% endif %}
+            <div class="line"></div>
+            <a class="container register-method" href="/login">
+                <div>Login</div>
+            </a>
+            <div class="line-choices"></div>
+            <a class="container register-method" href="/register">
+                <div>Register</div>
+            </a>
+        </div>
     </div>
 </div>
 {% endblock %}

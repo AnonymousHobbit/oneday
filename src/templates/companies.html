@@ -8,7 +8,12 @@
             <a class="container company" href="/companies/{{ company[0] }}">
                 <div class="info">
                     <h1>{{ company[1] }}</h1>
-                    <h2></h2>
+                    {% if company[2] is not none %}
+                        <p>Last submission {{ company[2] }} days ago</p>
+                    {% else %}
+                        <p>No submissions reported</p>
+
+                    {% endif %}
                 </div>
             </a>
         {% endfor %}

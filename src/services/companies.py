@@ -43,7 +43,7 @@ def register(name, username, email, country, password):
 
 
 def profile(username):
-    sql = "SELECT id, username, name, country FROM companies WHERE username=:username"
+    sql = "SELECT id, username, name, country, email, description FROM companies WHERE username=:username"
     result = db.session.execute(sql, {"username": username})
     user = result.fetchone()
     return user
@@ -73,7 +73,18 @@ def delete_scope(id):
 
 def get_all():
 
-    sql = "SELECT DISTINCT C.username, C.name, (SELECT ABS(NOW()::date - date::date) FROM reports WHERE C.username = company_name ORDER BY date ASC LIMIT 1) FROM companies C LEFT JOIN reports R ON C.username = R.company_name"
+    sql = "SELECT DISTINCT C.username, C.name, (SELECT ABS(NOW()::date - date::date) FROM reports WHERE C.username = company_name ORDER BY date DESC LIMIT 1) FROM companies C LEFT JOIN reports R ON C.username = R.company_name"
     result = db.session.execute(sql)
     companies = result.fetchall()
     return companies
+
+def update_description(username, description):
+    sql = "UPDATE companies SET description=:description WHERE username=:username"
+    db.session.execute(sql, {"description": description, "username": username})
+    db.session.commit()
+
+def get_reports_list(username):
+    sql = "SELECT id, title, status, user_name, TO_CHAR(date, 'dd / mm / yyyy') FROM reports WHERE company_name=:company_name ORDER BY date ASC"
+    result = db.session.execute(sql, {"company_name": username})
+    reports = result.fetchall()
+    return reports
