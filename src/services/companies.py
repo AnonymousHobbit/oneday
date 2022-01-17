@@ -16,7 +16,9 @@ def login(username, password):
     result = db.session.execute(sql, {"username": username})
     company = result.fetchone()
 
-    if not company and not check_password_hash(company[0], password):
+    if not company:
+        return False
+    if not check_password_hash(company[0], password):
         return False
 
     session["id"] = company[1]

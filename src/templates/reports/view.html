@@ -83,7 +83,7 @@
             </div>
         {% endif %}
         <div class="form-group">
-            <form method="POST" action="/users/{{user[0]}}/reports/{{data[0]}}/message">
+            <form method="POST" action="/users/{{data[10]}}/reports/{{data[0]}}/message">
                 <input type="hidden" name="csrf_token" value="{{ session.csrf }}">
                 <input class="form-input message" name="message" placeholder="Add a new message">
             </form>

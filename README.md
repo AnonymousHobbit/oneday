@@ -34,3 +34,4 @@ $ python src/helper.py
 * Companies can close or accept the reports
 * Companies can easily add or remove urls in the scope. 
 * Users and companies can send new messages to the report to make their communication easy.
+* Company must have atleast one scope added before user can report a vulnerability

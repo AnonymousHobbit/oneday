@@ -56,7 +56,7 @@ def report_message(username, report_id):
     if len(message) < 1:
         return redirect(f"/users/{username}/reports/{report_id}")
     report_data = reports.get_full(report_id)
-
+    print(report_data)
     if username != report_data[10]:
         return abort(403)
 
