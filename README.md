@@ -12,22 +12,22 @@ Set `SECRET_KEY` to application secret
 ### Running the program
 Install all dependencies
 ```
-$ pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
 Initialize the database
 ```
-$ python src/build.py
+$ python3 src/build.py
 ```
 
 Starting the application
 ```
-$ python src/app.py
+$ python3 src/app.py
 ```
 
 To automatically create test data, run the following script after the application is running
 ```
-$ python src/helper.py
+$ python3 src/helper.py
 ```
 ## Features
 * User can easily report a new vulnerability to company
