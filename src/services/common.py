@@ -12,7 +12,6 @@ def csrf_check():
     if session.get("csrf", 0) != request.form["csrf_token"]:
         abort(403)
 
-
 def role():
     return session.get("role", None)
 

@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, session, abort
 import requests
-#============USERS============
+
+
 import services.users as users
 import services.common as common
 import services.reports as reports
@@ -52,7 +53,7 @@ def report_message(username, report_id):
         return redirect("/login")
     common.csrf_check()
     message = request.form["message"]
-    if len(message) < 3:
+    if len(message) < 1:
         return redirect(f"/users/{username}/reports/{report_id}")
     report_data = reports.get_full(report_id)
 
@@ -88,7 +89,7 @@ def report_create(username, company_name):
         description = request.form["description"]
         severity = request.form["severity"]
         status = "open"
-        if len(title) < 3 or len(domain) < 3 or len(description) < 3 or len(severity) < 1:
+        if len(title) < 1 or len(domain) < 1 or len(description) < 1 or len(severity) < 1:
             return redirect(f"/users/{username}/reports/{company_name}/create")
         
         if not reports.create(title, domain, endpoint, description, severity, status, data):

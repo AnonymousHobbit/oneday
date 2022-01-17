@@ -1,8 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, session, abort
 import requests
 
-import services.users as users
-import services.reports as reports
 import services.companies as companies
 import services.common as common
 

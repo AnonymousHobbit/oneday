@@ -1,7 +1,7 @@
 import os
 from __main__ import db
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask import request, session
+from flask import session
 
 def find(username):
     sql = "SELECT id FROM users WHERE username=:username"
