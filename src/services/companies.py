@@ -39,6 +39,7 @@ def register(name, username, email, country, password):
         db.session.execute(
             sql, {"name": name, "username": username, "email": email, "country": country, "password": hash_value, "role": "company"})
         db.session.commit()
+        
     except:
         return False
 

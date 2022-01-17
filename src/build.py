@@ -11,6 +11,7 @@ try:
     cursor = connection.cursor()
 
     print("[+] Removing all tables")
+    cursor.execute("DROP TABLE IF EXISTS messages CASCADE")
     cursor.execute("DROP TABLE IF EXISTS scope CASCADE")
     cursor.execute("DROP TABLE IF EXISTS reports CASCADE")
     cursor.execute("DROP TABLE IF EXISTS companies CASCADE")

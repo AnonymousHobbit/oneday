@@ -25,7 +25,7 @@
                                 {% if user[2] %}
                                 <form action="/companies/{{user[0]}}/edit/scope/delete" method="post">
                                     <input type="hidden" name="url_id" value="{{url[0]}}">
-                                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                                    <input type="hidden" name="csrf_token" value="{{ session.csrf }}">
                                     <button class="btn-style" type="submit" value="Delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                 </form>
                                 {% endif %}
@@ -36,7 +36,7 @@
                 {% if user[2] %}
                 <form method="POST" action="/companies/{{user[0]}}/edit/scope/add">
                     <input name="url" class="form-input">
-                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                    <input type="hidden" name="csrf_token" value="{{ session.csrf }}">
                     <button type="submit" class="btn-style">Add</button>
                 </form>
                 {% endif %}

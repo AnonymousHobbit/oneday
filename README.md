@@ -4,8 +4,8 @@ Bug bounty platform where user can report vulnerabilities to companies
 ## Installation
 
 ### Configuration
-Copy `src/.env.example` to `src/.env`.
-Set `DATABASE_URL` to PostgreSQL database connection string
+Copy `src/.env.example` to `src/.env`.<br>
+Set `DATABASE_URL` to PostgreSQL database connection string<br>
 Set `SECRET_KEY` to application secret
 
 ### Running the program
@@ -23,11 +23,3 @@ Starting the application
 ```
 $ python src/app.py
 ```
-
-## ToDo
-- [x] Login & register
-- [ ] Profile page
-- [ ] Create an organisation
-- [ ] Organisation home page
-- [ ] Display reports in profile.
-- [ ] Submit a report

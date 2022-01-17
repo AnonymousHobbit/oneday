@@ -37,3 +37,12 @@ CREATE TABLE scope (
     url TEXT NOT NULL,
     company_id INTEGER NOT NULL REFERENCES companies(id)
 );
+
+CREATE TABLE messages (
+    id SERIAL PRIMARY KEY,
+    message TEXT NOT NULL,
+    date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    user_name TEXT NOT NULL,
+    user_role TEXT NOT NULL,
+    report_id INTEGER NOT NULL REFERENCES reports(id)
+);

@@ -20,12 +20,23 @@
                     <div class="value">
                         <p class="{{data[5]}}">{{ data[5] }}</p>
                     </div>
+                    {% if data[5] == "open" and user[1] == "company" %}
+                    <form action="/users/{{user[0]}}/reports/{{data[0]}}/edit" method="post">
+                        <input type="hidden" name="csrf_token" value="{{ session.csrf }}">
+                        <button type="submit" name=status class="accept-btn" value="accepted">accept</button>
+                    </form>
+
+                    <form action="/users/{{user[0]}}/reports/{{data[0]}}/edit" method="post">
+                        <input type="hidden" name="csrf_token" value="{{ session.csrf }}">
+                        <button type="submit" name="status" class="close-btn" value="closed">Close</button>
+                    </form>
+                    {% endif %}
                 </div>
 
                 <div class="container">
                     <h2>Company</h2>
                     <div class="value">
-                        <p><a href="/companies/{{ data[6] }}">{{ data[7] }}</a></p>
+                        <p><a href="/companies/{{ data[9] }}">{{ data[7] }}</a></p>
                     </div>
                 </div>
 
@@ -53,11 +64,32 @@
             <div class="form-group">
                 <label>Description and impact</label>
                 <div class="report-group">
-                    <p>{{data[4]}}</p>
+                    <pre>{{data[4]}}</pre>
                 </div>
             </div>
         {% endif %}
+
+        <div class="report-line"></div>
+        
+        {% if messages %}
+            <div class="message-box">
+            {% for message in messages %}
+                <div class="container">
+                    <h1><span>{{message[0]}}</span> [ {{message[1]}} ]</h1>
+                    <h3>{{message[2]}}</h3>
+                    <pre class="msg">{{message[3]}}</pre>
+                </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+        <div class="form-group">
+            <form method="POST" action="/users/{{user[0]}}/reports/{{data[0]}}/message">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf }}">
+                <input class="form-input message" name="message" placeholder="Add a new message">
+            </form>
+        </div>
     </div>
+    
 </div>
 
 {% endblock %}

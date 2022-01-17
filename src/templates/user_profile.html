@@ -2,12 +2,26 @@
 
 {% block content %}
 <div id="profile">
+    {% if user %}
+    <div class="profile-info">
+        <h1>{{ user[0] }}</h1>
+        {% if user[1] %}
+            <h3>{{user[1]}}</h3>
+        {% endif %}
+            <h3></i>{{user[2]}}</h3>
+    </div>
+    {% endif %}
+
     {% if reports %}
         {% for report in reports %}
             <div class="container">
                 <div class="report">
-                    <p>Submission <a href="/users/{{user[0]}}/reports/{{report[0]}}">{{ report[1] }}</a> to <a href="/companies/{{report[3]}}">{{report[4]}}</a></p>
-                    <p>{{report[2]}}</p>
+                    <p>Submission <a href="/users/{{user[0]}}/reports/{{report[0]}}">{{ report[1] }}</a> to <a href="/companies/{{report[4]}}">{{report[5]}}</a></p>
+                    <div class="right-info">
+                        <p class="item {{report[3]}}">{{report[3]}}</p>
+                        <p class="item">{{report[2]}}</p>
+                    </div>
+                    
                 </div>
             </div>
         {% endfor %}

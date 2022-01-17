@@ -13,8 +13,9 @@ def login(username, password):
     sql = "SELECT password, id, role FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username": username})
     user = result.fetchone()
-
-    if not user and not check_password_hash(user[0], password):
+    if not user:
+        return False
+    if not check_password_hash(user[0], password):
         return False
 
     session["id"] = user[1]
@@ -35,10 +36,11 @@ def register(username, full_name, country, password):
         db.session.execute(
             sql, {"username": username, "password": hash_value, "full_name": full_name, "country": country, "role": "user"})
         db.session.commit()
+        
     except:
         return False
 
-    return login(username, password)
+    
 
 def profile(username):
     sql = "SELECT username, full_name, country FROM users WHERE username=:username"
@@ -48,7 +50,7 @@ def profile(username):
 
 def get_reports(username):
     try:
-        sql = "SELECT R.id, R.title, R.date, C.username, C.name FROM reports R LEFT JOIN companies C ON R.company_name = C.username WHERE user_name=:username"
+        sql = "SELECT R.id, R.title, R.date, R.status, C.username, C.name FROM reports R LEFT JOIN companies C ON R.company_name = C.username WHERE user_name=:username"
         result = db.session.execute(sql, {"username": username})
         db.session.commit()
         reports = result.fetchall()

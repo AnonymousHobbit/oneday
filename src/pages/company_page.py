@@ -15,8 +15,6 @@ def scope_add(company_name):
     if not common.auth():
         return redirect("/login")
 
-    common.csrf_check()
-
     url = request.form["url"]
     companies.add_scope(url)
 
@@ -34,7 +32,8 @@ def scope_delete(company_name):
 
     return redirect(f"/companies/{company_name}")
 
-@company_page.route("/<username>", methods=["GET", "POST"])
+
+@company_page.route("/<username>", methods=["GET", "POST"], strict_slashes=False)
 def profile(username, error=None):
     if not common.auth():
         return redirect("/login")

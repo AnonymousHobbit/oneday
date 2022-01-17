@@ -9,7 +9,6 @@ home_page = Blueprint("home_page", __name__)
 
 @home_page.route("/")
 def index():
-    print(session)
     role = common.role()
     username = common.username()
 

@@ -6,16 +6,42 @@ import services.common as common
 import services.reports as reports
 import services.companies as companies
 user_page = Blueprint("user_page", __name__, url_prefix="/users")
+    
 
-@user_page.route("/<username>/reports/<report_id>", methods=["GET", "POST"])
+@user_page.route("/<username>/reports/<report_id>", methods=["GET"])
 def report(username, report_id):
     if not common.auth():
         return redirect("/login")
     user_data = [common.username(), common.role()]
     report_data = reports.get_full(report_id)
+    messages = reports.get_messages(report_id)
     if report_data is None:
         return abort(404)
-    return render_template("reports/view.html", data=report_data, user=user_data)
+    return render_template("reports/view.html", data=report_data, user=user_data, messages=messages)
+
+
+@user_page.route("/<username>/reports/<report_id>/edit", methods=["POST"])
+def report_close(username, report_id):
+    if not common.auth():
+        return redirect("/login")
+    status = request.form["status"]
+    if status not in ["open", "closed", "accepted"]:
+        return redirect(f"/users/{username}/reports/{report_id}")
+
+    common.csrf_check()
+    reports.close(report_id, status)
+    return redirect(f"/users/{username}/reports/{report_id}")
+
+@user_page.route("/<username>/reports/<report_id>/message", methods=["POST"])
+def report_message(username, report_id):
+    if not common.auth():
+        return redirect("/login")
+    common.csrf_check()
+    message = request.form["message"]
+
+    if not reports.add_message(report_id, message):
+        return abort(500)
+    return redirect(f"/users/{username}/reports/{report_id}")
 
 @user_page.route("/<username>/reports/<company_name>/create", methods=["GET", "POST"])
 def report_create(username, company_name):
@@ -47,7 +73,7 @@ def report_create(username, company_name):
         return redirect(f"/users/{username}")
 
 #Profile
-@user_page.route("/<username>", methods=["GET", "POST"])
+@user_page.route("/<username>", methods=["GET"], strict_slashes=False)
 def profile(username, error=None):
     if not common.auth():
         return redirect("/login")
