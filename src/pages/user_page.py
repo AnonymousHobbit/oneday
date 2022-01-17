@@ -12,9 +12,16 @@ user_page = Blueprint("user_page", __name__, url_prefix="/users")
 def report(username, report_id):
     if not common.auth():
         return redirect("/login")
+
     user_data = [common.username(), common.role()]
     report_data = reports.get_full(report_id)
     messages = reports.get_messages(report_id)
+
+    if username != report_data[10]:
+        return abort(403)
+
+    common.permissions(report_data[10], report_data[9])
+
     if report_data is None:
         return abort(404)
     return render_template("reports/view.html", data=report_data, user=user_data, messages=messages)
@@ -25,10 +32,17 @@ def report_close(username, report_id):
     if not common.auth():
         return redirect("/login")
     status = request.form["status"]
+    report_data = reports.get_full(report_id)
+
+    if username != report_data[10]:
+        return abort(403)
+
     if status not in ["open", "closed", "accepted"]:
         return redirect(f"/users/{username}/reports/{report_id}")
 
+    common.permissions(report_data[9])
     common.csrf_check()
+
     reports.close(report_id, status)
     return redirect(f"/users/{username}/reports/{report_id}")
 
@@ -38,6 +52,14 @@ def report_message(username, report_id):
         return redirect("/login")
     common.csrf_check()
     message = request.form["message"]
+    if len(message) < 3:
+        return redirect(f"/users/{username}/reports/{report_id}")
+    report_data = reports.get_full(report_id)
+
+    if username != report_data[10]:
+        return abort(403)
+
+    common.permissions(report_data[10], report_data[9])
 
     if not reports.add_message(report_id, message):
         return abort(500)
@@ -57,7 +79,7 @@ def report_create(username, company_name):
         
         if not common.auth():
             return redirect("/users/login")
-
+        common.permissions(username)
         common.csrf_check()
 
         title = request.form["title"]
@@ -66,7 +88,9 @@ def report_create(username, company_name):
         description = request.form["description"]
         severity = request.form["severity"]
         status = "open"
-
+        if len(title) < 3 or len(domain) < 3 or len(description) < 3 or len(severity) < 1:
+            return redirect(f"/users/{username}/reports/{company_name}/create")
+        
         if not reports.create(title, domain, endpoint, description, severity, status, data):
             return render_template("reports/create.html", data=data, error="Something went wrong")
         
@@ -80,6 +104,7 @@ def profile(username, error=None):
 
     user_data = users.profile(username)
     user_reports = users.get_reports(username)
+    common.permissions(username)
     if user_data is None:
         return abort(404)
     
@@ -145,6 +170,7 @@ def logout():
         del session["username"]
         del session["id"]
         del session["csrf"]
+        del session["role"]
         return redirect("/")
     except:
         return redirect("/login")

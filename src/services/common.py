@@ -1,4 +1,4 @@
-from flask import request, session
+from flask import request, session, abort
 
 
 def username():
@@ -9,9 +9,8 @@ def id():
 
 
 def csrf_check():
-    if session.get("csrf", 0) == request.form["csrf_token"]:
-        return True
-    return False
+    if session.get("csrf", 0) != request.form["csrf_token"]:
+        abort(403)
 
 
 def role():
@@ -22,4 +21,10 @@ def auth():
     if session.get("id", 0) > 0 and session.get("username", None) is not None:
         return True
     return False
+
+def permissions(name, company_name=None):
+    
+    if session.get("username", None) not in [name, company_name]:
+        abort(403)
+    
 

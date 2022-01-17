@@ -1,5 +1,6 @@
 # Oneday
-Bug bounty platform where user can report vulnerabilities to companies
+OneDay is a 'Bug Bounty' -platform where users can report vulnerabilities to companies involved.
+
 
 ## Installation
 
@@ -23,3 +24,13 @@ Starting the application
 ```
 $ python src/app.py
 ```
+
+To automatically create test data, run the following script after the application is running
+```
+$ python src/helper.py
+```
+## Features
+* User can easily report a new vulnerability to company
+* Companies can close or accept the reports
+* Companies can easily add or remove urls in the scope. 
+* Users and companies can send new messages to the report to make their communication easy.

@@ -17,6 +17,7 @@ def register_user(username, full_name, country, password):
         print(f"[-] {error.text}")
     else:
         print(f"[+] User '{username}' registered")
+        print(f"[+] Log in with: {username}:{password}")
 
 
 def register_company(name, username, email, country, password):
@@ -34,7 +35,8 @@ def register_company(name, username, email, country, password):
     if error := soup.find("p", {"class": "errortext"}):
         print(f"[-] {error.text}")
     else:
-        print(f"[+] Company '{username}' registered")
+        print(f"[+] Company '{username}:{password}' registered")
+        print(f"[+] Log in with: {username}:{password}")
 
 def add_scope(urls, credentials):
     data = {
@@ -49,8 +51,14 @@ def add_scope(urls, credentials):
     print(f"[+] Scopes {urls} added")
 
 if __name__ == "__main__":
+    #Create users
     register_user("admin", "Test Tester", "Finland", "admin")
-    register_company("Red Bull", "redbull", "redbull@test.com", "Austria", "root")
+    register_user("user", "Test User", "Finland", "user")
+
+    #Create companies
+    register_company("Test", "redbull", "test@test.com", "Austria", "root")
     register_company("Kivinen", "kivi", "kivinen@test.com", "Finland", "root")
-    add_scope(["*.redbull.com", "*.redbullmediahouse.com"],
-              {"username": "redbull", "password": "root"})
+
+    # Add scope to redbull
+    add_scope(["*.testhouse.fi", "*.test.com"],
+              {"username": "test", "password": "root"})

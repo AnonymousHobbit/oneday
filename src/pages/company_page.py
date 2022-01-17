@@ -13,8 +13,11 @@ company_page = Blueprint("company_page", __name__, url_prefix="/companies")
 def scope_add(company_name):
     if not common.auth():
         return redirect("/login")
-
+    common.permissions(company_name)
+    common.csrf_check()
     url = request.form["url"]
+    if len(url) < 1:
+        return redirect(f"/companies/{company_name}")
     companies.add_scope(url)
 
     return redirect(f"/companies/{company_name}")
@@ -26,10 +29,15 @@ def edit_description(company_name):
         return redirect("/login")
     common.csrf_check()
     description = request.form["description"]
+    if len(description) < 3:
+        return redirect(f"/companies/{company_name}")
+    common.permissions(company_name)
     companies.update_description(company_name, description)
     
 
     return redirect(f"/companies/{company_name}")
+
+
 @company_page.route("/", methods=["GET"], strict_slashes=False)
 def index_page():
     if not common.auth():
@@ -43,13 +51,16 @@ def scope_delete(company_name):
         return redirect("/login")
 
     common.csrf_check()
+    common.permissions(company_name)
     url = request.form["url_id"]
+    if len(url) < 1:
+        return redirect(f"/companies/{company_name}")
     companies.delete_scope(url)
 
     return redirect(f"/companies/{company_name}")
 
 
-@company_page.route("/<username>", methods=["GET", "POST"], strict_slashes=False)
+@company_page.route("/<username>", methods=["GET"], strict_slashes=False)
 def profile(username, error=None):
     if not common.auth():
         return redirect("/login")
