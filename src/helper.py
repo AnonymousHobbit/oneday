@@ -16,8 +16,7 @@ def register_user(username, full_name, country, password):
     if error := soup.find("p", {"class": "errortext"}):
         print(f"[-] {error.text}")
     else:
-        print(f"[+] User '{username}' registered")
-        print(f"[+] Log in with: {username}:{password}")
+        print(f"[+] User '{username}' registered, log in with: {username}:{password}")
 
 
 def register_company(name, username, email, country, password):
@@ -35,8 +34,7 @@ def register_company(name, username, email, country, password):
     if error := soup.find("p", {"class": "errortext"}):
         print(f"[-] {error.text}")
     else:
-        print(f"[+] Company '{username}:{password}' registered")
-        print(f"[+] Log in with: {username}:{password}")
+        print(f"[+] Company '{username}' registered, log in with: {username}:{password}")
 
 def add_scope(urls, credentials):
     data = {
