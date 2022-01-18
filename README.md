@@ -4,6 +4,10 @@ OneDay is a 'Bug Bounty' -platform where users can report vulnerabilities to com
 You can test the application [here](https://oneday.ojis.fi)
 ## Installation
 
+### Prerequisites
+* Python version 3.8 or up
+* Postgresql database
+
 ### Configuration
 Copy `src/.env.example` to `src/.env`.<br>
 Set `DATABASE_URL` to PostgreSQL database connection string<br>

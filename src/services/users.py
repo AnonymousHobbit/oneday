@@ -27,8 +27,8 @@ def login(username, password):
 
 def register(username, full_name, country, password):
     hash_value = generate_password_hash(password)
-
-    if user := find(username):
+    user = find(username)
+    if user:
         return user
 
     try:

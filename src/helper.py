@@ -12,8 +12,8 @@ def register_user(username, full_name, country, password):
 
     r = requests.post("http://localhost:5000/users/register", data=data)
     soup = BeautifulSoup(r.text, "html.parser")
-    
-    if error := soup.find("p", {"class": "errortext"}):
+    error = soup.find("p", {"class": "errortext"})
+    if error:
         print(f"[-] {error.text}")
     else:
         print(f"[+] User '{username}' registered, log in with: {username}:{password}")
@@ -31,7 +31,8 @@ def register_company(name, username, email, country, password):
 
     r = requests.post("http://localhost:5000/companies/register", data=data)
     soup = BeautifulSoup(r.text, "html.parser")
-    if error := soup.find("p", {"class": "errortext"}):
+    error = soup.find("p", {"class": "errortext"})
+    if error:
         print(f"[-] {error.text}")
     else:
         print(f"[+] Company '{username}' registered, log in with: {username}:{password}")

@@ -30,8 +30,8 @@ def login(username, password):
 
 def register(name, username, email, country, password):
     hash_value = generate_password_hash(password)
-
-    if company := find(username):
+    company = find(username)
+    if company:
         return company
 
     try:
