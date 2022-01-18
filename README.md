@@ -1,7 +1,7 @@
 # Oneday
 OneDay is a 'Bug Bounty' -platform where users can report vulnerabilities to companies involved.
 
-
+You can test the application [here](https://oneday.ojis.fi)
 ## Installation
 
 ### Configuration
@@ -22,7 +22,8 @@ $ python3 src/build.py
 
 Starting the application
 ```
-$ python3 src/app.py
+$ cd src
+$ flask run
 ```
 
 To automatically create test data, run the following script after the application is running

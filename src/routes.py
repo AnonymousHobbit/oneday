@@ -1,4 +1,4 @@
-from __main__ import app
+from app import app
 
 from pages.home_page import home_page
 from pages.user_page import user_page

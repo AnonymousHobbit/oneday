@@ -1,4 +1,4 @@
-from __main__ import db
+from app import db
 from flask import session
 
 def create(title, domain, endpoint, description, severity, status, data):
