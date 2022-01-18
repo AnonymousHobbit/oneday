@@ -12,5 +12,3 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 import routes
-if __name__ == "__main__":
-    app.run(host='127.0.0.1')
