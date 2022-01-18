@@ -6,6 +6,7 @@ import services.users as users
 import services.common as common
 import services.reports as reports
 import services.companies as companies
+
 user_page = Blueprint("user_page", __name__, url_prefix="/users")
     
 
