@@ -157,7 +157,7 @@ def register():
         #Check if registration was successful
         if users.register(username.lower(), full_name, country, password):
             return render_template("register/user.html", error="Username already exists", countries=countries)
-
+        users.login(username.lower(), password)
         return redirect("/")
     
     if common.username() is not None:

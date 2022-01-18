@@ -101,7 +101,7 @@ def register():
     if request.method == "POST":
         
         name = request.form["name"]
-        username = request.form["username"]
+        username = request.form["username"].strip()
         email = request.form["email"]
         country = request.form["country"]
         password = request.form["password"]
@@ -122,9 +122,10 @@ def register():
         #Check if registration was successful
         if companies.register(name, username, email, country, password):
             return render_template("register/company.html", error="Company already exists", countries=countries)
-
-        if common.username() is not None:
-            return redirect("/")
+        companies.login(username.lower(), password)
+        return redirect("/")
+    if common.username() is not None:
+        return redirect("/")
 
     return render_template("register/company.html", countries=countries)
 
